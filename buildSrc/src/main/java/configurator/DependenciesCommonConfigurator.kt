@@ -22,8 +22,10 @@ class DependenciesCommonConfigurator : ProjectConfigurator {
     override fun configure(project: Project) {
         project.configurationScope {
             testImplementation(MultiThrifterModule.Coretest) {
-                // TODO ignoreFor(Core, Ui)
+                ignoreFor(MultiThrifterModule.Core)
             }
+
+            implementation(MultiThrifterModule.Core)
 
             testLibs()
 

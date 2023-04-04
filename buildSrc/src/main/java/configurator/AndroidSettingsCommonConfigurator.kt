@@ -30,7 +30,7 @@ class AndroidSettingsCommonConfigurator : ProjectConfigurator {
             project.logger.error("Failed to configure android settings for ${project.name} module")
         }
         kotlinOptionsConfiguration(project)
-        // TODO configureKapt(project)
+        configureKapt(project)
     }
 
     /**

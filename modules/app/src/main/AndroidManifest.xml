@@ -5,29 +5,13 @@
     package="com.multithrifter.app">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MultiThrifter"
-        tools:targetApi="33">
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MultiThrifter">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-    </application>
+        android:theme="@style/Theme.AppCompat"
+        tools:targetApi="33" />
 
 </manifest>

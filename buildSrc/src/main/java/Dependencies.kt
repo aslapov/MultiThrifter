@@ -8,8 +8,8 @@ object Versions {
 
     const val KOTLIN_SERIALIZATION = "1.5.0"
     const val COROUTINES_VERSION = "1.6.4"
-    const val DAGGER_2 = "2.44"
-    const val ROOM = "2.4.1"
+    const val DAGGER_2 = "2.45"
+    const val ROOM = "2.5.1"
     const val JAVAX_INJECT = "1"
     const val APP_COMPAT = "1.2.0"
     const val MATERIAL_DESIGN = "1.3.0"
@@ -20,6 +20,7 @@ object Versions {
     const val OK_HTTP_3 = "4.9.1"
     const val RETROFIT_2 = "2.9.0"
     const val RETROFIT_KOTLINX_CONVERTER = "0.8.0"
+    const val TIMBER = "5.0.1"
 
     // Compose
     const val COMPOSE = "1.4.0"
@@ -100,6 +101,10 @@ object Libraries {
         const val MOCKK = "io.mockk:mockk:${Versions.MOCKK}"
         const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES_VERSION}"
     }
+
+    object Utils {
+        const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
+    }
 }
 
 object Plugins {
@@ -133,8 +138,13 @@ object Android {
 }
 
 object Exclusions {
-    val KAPT = setOf<String>()
+    val KAPT = setOf(
+        MultiThrifterModule.Coretest.name,
+    )
+
     val COMPOSE = setOf(
+        MultiThrifterModule.App.name,
+        MultiThrifterModule.Core.name,
         MultiThrifterModule.Network.name,
         MultiThrifterModule.Networkapi.name,
         MultiThrifterModule.Networkimpl.name,
