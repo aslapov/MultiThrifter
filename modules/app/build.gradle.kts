@@ -6,6 +6,9 @@ dependencies {
     implementation(project(MultiThrifterModule.Network.path))
     implementation(project(MultiThrifterModule.Networkapi.path))
     implementation(project(MultiThrifterModule.Networkimpl.path))
+    implementation(project(MultiThrifterModule.Accounts.path))
+    implementation(project(MultiThrifterModule.Expenses.path))
+    implementation(project(MultiThrifterModule.Incomes.path))
 
     implementation(Libraries.Support.APP_COMPAT)
 }

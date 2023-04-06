@@ -11,7 +11,7 @@ object Versions {
     const val DAGGER_2 = "2.45"
     const val ROOM = "2.5.1"
     const val JAVAX_INJECT = "1"
-    const val APP_COMPAT = "1.2.0"
+    const val APP_COMPAT = "1.6.1"
     const val MATERIAL_DESIGN = "1.3.0"
     const val CONSTRAINT_LAYOUT = "2.1.1"
     const val ANDROID_X_CORE = "1.1.0"
@@ -146,7 +146,6 @@ object Exclusions {
 
     val COMPOSE = setOf(
         MultiThrifterModule.App.name,
-        MultiThrifterModule.Core.name,
         MultiThrifterModule.Main.name,
         MultiThrifterModule.Network.name,
         MultiThrifterModule.Networkapi.name,

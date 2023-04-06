@@ -46,7 +46,12 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
             .inject(this)
 
         navigator.setNavigationHandler(this)
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(listener)
+
+        with(binding.bottomNavigation) {
+            selectedItemId = R.id.menu_account
+            dependencies.getAccountsActions().showAccountsScreen()
+            setOnNavigationItemSelectedListener(listener)
+        }
     }
 
     override fun onBackPressed() {

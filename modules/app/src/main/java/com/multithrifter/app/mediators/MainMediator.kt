@@ -20,7 +20,7 @@ class MainMediator {
             override fun getExpensesActions(): ExpensesActions {
                 return object : ExpensesActions {
                     override fun showExpensesScreen() {
-
+                        MediatorManager.expensesMediator.getApi().showExpensesScreen()
                     }
                 }
             }
@@ -28,7 +28,7 @@ class MainMediator {
             override fun getIncomesActions(): IncomesActions {
                 return object : IncomesActions {
                     override fun showIncomesScreen() {
-
+                        MediatorManager.incomesMediator.getApi().showIncomesScreen()
                     }
                 }
             }
@@ -36,7 +36,7 @@ class MainMediator {
             override fun getAccountsActions(): AccountsActions {
                 return object : AccountsActions {
                     override fun showAccountsScreen() {
-
+                        MediatorManager.accountsMediator.getApi().showAccountsScreen()
                     }
                 }
             }
