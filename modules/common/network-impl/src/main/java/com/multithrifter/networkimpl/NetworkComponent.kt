@@ -1,13 +1,12 @@
 package com.multithrifter.networkimpl
 
-import com.multithrifter.core.AppProvider
+import com.multithrifter.core.di.CoreComponent
 import com.multithrifter.networkapi.NetworkProvider
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
+@NetworkScope
 @Component(
-    dependencies = [AppProvider::class],
+    dependencies = [CoreComponent::class],
     modules = [NetworkModule::class]
 )
 interface NetworkComponent : NetworkProvider

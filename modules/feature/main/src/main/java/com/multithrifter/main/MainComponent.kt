@@ -1,13 +1,11 @@
 package com.multithrifter.main
 
-import com.multithrifter.core.AppProvider
-import com.multithrifter.dbapi.DatabaseProvider
-import com.multithrifter.networkapi.NetworkProvider
+import com.multithrifter.core.di.CoreComponent
+import com.multithrifter.core.di.ModuleScope
 import dagger.Component
 
-@Component(
-    dependencies = [AppProvider::class, DatabaseProvider::class, NetworkProvider::class]
-)
+@ModuleScope
+@Component(dependencies = [CoreComponent::class, MainDependencies::class])
 interface MainComponent {
 
     fun inject(activity: MainActivity)

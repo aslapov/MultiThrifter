@@ -1,14 +1,14 @@
 package com.multithrifter.db
 
-import com.multithrifter.core.AppProvider
+import com.multithrifter.core.di.CoreComponent
 import com.multithrifter.dbapi.DatabaseProvider
 import com.multithrifter.dbimpl.DaggerDatabaseComponent
 
 object DatabaseProviderFactory {
 
-    fun createDatabaseProvider(appProvider: AppProvider): DatabaseProvider {
+    fun createDatabaseProvider(coreComponent: CoreComponent): DatabaseProvider {
         return DaggerDatabaseComponent.builder()
-            .appProvider(appProvider)
+            .coreComponent(coreComponent)
             .build()
     }
 }

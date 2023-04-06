@@ -6,7 +6,6 @@ import com.multithrifter.dbapi.MultiThrifterDatabaseContract
 import com.multithrifter.dbapi.dao.AccountsDao
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
@@ -16,13 +15,13 @@ class DatabaseModule {
     }
 
     @Provides
-    @Singleton
+    @DatabaseScope
     fun provideAccountsDao(multiThrifterDatabaseContract: MultiThrifterDatabaseContract): AccountsDao {
         return multiThrifterDatabaseContract.accountsDao()
     }
 
     @Provides
-    @Singleton
+    @DatabaseScope
     fun provideDatabase(context: Context): MultiThrifterDatabaseContract {
         return Room.databaseBuilder(
             context = context,

@@ -1,10 +1,11 @@
 package com.multithrifter.app
 
-import android.app.Application
-import android.content.Context
-import com.multithrifter.core.AppProvider
+import com.multithrifter.app.mediators.MediatorManager
+import com.multithrifter.core.CoreApplication
 
-class App : Application(), AppProvider {
-
-    override fun provideContext(): Context = applicationContext
+class App : CoreApplication() {
+    override fun onCreate() {
+        MediatorManager.init()
+        super.onCreate()
+    }
 }

@@ -8,7 +8,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import javax.inject.Singleton
 
 @Module
 internal class NetworkModule {
@@ -24,7 +23,7 @@ internal class NetworkModule {
         encodeDefaults = true
     }
 
-    @Singleton
+    @NetworkScope
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
@@ -36,7 +35,7 @@ internal class NetworkModule {
             .build()
     }
 
-    @Singleton
+    @NetworkScope
     @Provides
     fun provideOkHttpClient(
         apiKeyInterceptor: ApiKeyInterceptor,

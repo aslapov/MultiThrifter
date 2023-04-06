@@ -1,1 +1,6 @@
-<manifest package="com.multithrifter.networkimpl"/>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.multithrifter.networkimpl">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

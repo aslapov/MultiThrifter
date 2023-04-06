@@ -20,6 +20,7 @@ object Versions {
     const val OK_HTTP_3 = "4.9.1"
     const val RETROFIT_2 = "2.9.0"
     const val RETROFIT_KOTLINX_CONVERTER = "0.8.0"
+    const val JETPACK_NAVIGATION = "2.3.5"
     const val TIMBER = "5.0.1"
 
     // Compose
@@ -53,10 +54,11 @@ object Libraries {
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
         const val ANDROID_X_CORE = "androidx.core:core:${Versions.ANDROID_X_CORE}"
         const val ANDROID_X_CORE_KTX = "androidx.core:core-ktx:${Versions.ANDROID_X_CORE}"
-        const val ANDROID_X_FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.ANDROID_X_FRAGMENT}"
         const val ANDROID_X_FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.ANDROID_X_FRAGMENT}"
         const val VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
         const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE}"
+        const val JETPACK_NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.JETPACK_NAVIGATION}"
+        const val JETPACK_NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.JETPACK_NAVIGATION}"
     }
 
     object Compose {
@@ -145,6 +147,7 @@ object Exclusions {
     val COMPOSE = setOf(
         MultiThrifterModule.App.name,
         MultiThrifterModule.Core.name,
+        MultiThrifterModule.Main.name,
         MultiThrifterModule.Network.name,
         MultiThrifterModule.Networkapi.name,
         MultiThrifterModule.Networkimpl.name,
