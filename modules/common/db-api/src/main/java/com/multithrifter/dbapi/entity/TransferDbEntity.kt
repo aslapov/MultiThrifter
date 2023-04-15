@@ -1,4 +1,4 @@
-package com.multithrifter.dbapi.dto
+package com.multithrifter.dbapi.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = TransferDto.TABLE_NAME,
+    tableName = TransferDbEntity.TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = AccountDbEntity::class,
@@ -20,7 +20,7 @@ import androidx.room.PrimaryKey
         ),
     ],
 )
-data class TransferDto(
+data class TransferDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val description: String,
     val date: Long,

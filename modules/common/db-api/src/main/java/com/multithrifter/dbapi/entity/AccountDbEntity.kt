@@ -1,4 +1,4 @@
-package com.multithrifter.dbapi.dto
+package com.multithrifter.dbapi.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     tableName = AccountDbEntity.TABLE_NAME,
     foreignKeys = [
         ForeignKey(
-            entity = Currency::class,
+            entity = CurrencyDbEntity::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("currency_id"),
         ),

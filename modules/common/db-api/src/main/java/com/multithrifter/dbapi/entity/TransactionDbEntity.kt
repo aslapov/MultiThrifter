@@ -1,4 +1,4 @@
-package com.multithrifter.dbapi.dto
+package com.multithrifter.dbapi.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = TransactionDto.TABLE_NAME,
+    tableName = TransactionDbEntity.TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = AccountDbEntity::class,
@@ -14,13 +14,13 @@ import androidx.room.PrimaryKey
             childColumns = arrayOf("account_id"),
         ),
         ForeignKey(
-            entity = CategoryDto::class,
+            entity = CategoryDbEntity::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("category_id"),
         ),
     ],
 )
-data class TransactionDto(
+data class TransactionDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val description: String,
     val amount: Float,

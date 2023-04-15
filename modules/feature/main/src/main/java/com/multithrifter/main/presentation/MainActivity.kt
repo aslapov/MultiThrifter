@@ -1,14 +1,18 @@
-package com.multithrifter.main
+package com.multithrifter.main.presentation
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.multithrifter.core.CoreApplication
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.navigation.NavigationBarView
 import com.multithrifter.core.navigation.GlobalNavigator
 import com.multithrifter.core.navigation.NavigationHandler
 import com.multithrifter.core.navigation.TransitionAnimationSet
+import com.multithrifter.main.MainDependencies
+import com.multithrifter.main.MainFeature
+import com.multithrifter.main.R
 import com.multithrifter.main.databinding.ActivityMainBinding
 import javax.inject.Inject
 
@@ -20,11 +24,16 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
     @Inject
     lateinit var dependencies: MainDependencies
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+
     private lateinit var binding: ActivityMainBinding
 
-    private val listener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+    private val listener = NavigationBarView.OnItemSelectedListener { menuItem ->
         if (binding.bottomNavigation.selectedItemId == menuItem.itemId) {
-            return@OnNavigationItemSelectedListener false
+            return@OnItemSelectedListener false
         }
         when (menuItem.itemId) {
             R.id.menu_expense -> dependencies.getExpensesActions().showExpensesScreen()
@@ -39,18 +48,15 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        DaggerMainComponent.builder()
-            .coreComponent(CoreApplication.app.coreComponent)
-            .mainDependencies(requireNotNull(MainFeature.dependenciesProvider?.getDependencies()))
-            .build()
-            .inject(this)
+        MainFeature.component().inject(this)
+        viewModel.updateCurrencyRates()
 
         navigator.setNavigationHandler(this)
 
         with(binding.bottomNavigation) {
-            selectedItemId = R.id.menu_account
-            dependencies.getAccountsActions().showAccountsScreen()
-            setOnNavigationItemSelectedListener(listener)
+            selectedItemId = R.id.menu_expense
+            dependencies.getExpensesActions().showExpensesScreen()
+            setOnItemSelectedListener(listener)
         }
     }
 

@@ -6,9 +6,9 @@ import androidx.room.Query
 import androidx.room.OnConflictStrategy
 import androidx.room.Transaction
 import androidx.room.Update
-import com.multithrifter.dbapi.dto.AccountDbEntity
 import com.multithrifter.dbapi.dto.AccountDto
-import com.multithrifter.dbapi.dto.Currency
+import com.multithrifter.dbapi.entity.AccountDbEntity
+import com.multithrifter.dbapi.entity.CurrencyDbEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,11 +20,12 @@ interface AccountsDao {
             "${AccountDbEntity.TABLE_NAME}.id, " +
             "${AccountDbEntity.TABLE_NAME}.name, " +
             "${AccountDbEntity.TABLE_NAME}.balance, " +
-            "${Currency.TABLE_NAME}.id AS currencyId, " +
-            "${Currency.TABLE_NAME}.name AS currencyName, " +
-            "${Currency.TABLE_NAME}.symbol AS currencySymbol " +
+            "${CurrencyDbEntity.TABLE_NAME}.id AS currencyId, " +
+            "${CurrencyDbEntity.TABLE_NAME}.name AS currencyName, " +
+            "${CurrencyDbEntity.TABLE_NAME}.short_name AS currencyShortName, " +
+            "${CurrencyDbEntity.TABLE_NAME}.symbol AS currencySymbol " +
         "FROM ${AccountDbEntity.TABLE_NAME} " +
-        "INNER JOIN ${Currency.TABLE_NAME} on ${AccountDbEntity.TABLE_NAME}.currency_id = ${Currency.TABLE_NAME}.id"
+        "INNER JOIN ${CurrencyDbEntity.TABLE_NAME} on ${AccountDbEntity.TABLE_NAME}.currency_id = ${CurrencyDbEntity.TABLE_NAME}.id"
     )
     fun getAccounts(): Flow<List<AccountDto>>
 

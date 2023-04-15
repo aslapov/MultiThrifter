@@ -3,21 +3,21 @@ package com.multithrifter.dbimpl
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.multithrifter.dbapi.MultiThrifterDatabaseContract
-import com.multithrifter.dbapi.dto.AccountDbEntity
-import com.multithrifter.dbapi.dto.CategoryDto
-import com.multithrifter.dbapi.dto.Currency
-import com.multithrifter.dbapi.dto.ExchangeRateDto
-import com.multithrifter.dbapi.dto.TransactionDto
-import com.multithrifter.dbapi.dto.TransferDto
+import com.multithrifter.dbapi.entity.AccountDbEntity
+import com.multithrifter.dbapi.entity.CategoryDbEntity
+import com.multithrifter.dbapi.entity.CurrencyDbEntity
+import com.multithrifter.dbapi.entity.ExchangeRateDbEntity
+import com.multithrifter.dbapi.entity.TransactionDbEntity
+import com.multithrifter.dbapi.entity.TransferDbEntity
 
 @Database(
     entities = [
         AccountDbEntity::class,
-        CategoryDto::class,
-        Currency::class,
-        ExchangeRateDto::class,
-        TransactionDto::class,
-        TransferDto::class,
+        CategoryDbEntity::class,
+        CurrencyDbEntity::class,
+        ExchangeRateDbEntity::class,
+        TransactionDbEntity::class,
+        TransferDbEntity::class,
     ],
     version = 1,
 )

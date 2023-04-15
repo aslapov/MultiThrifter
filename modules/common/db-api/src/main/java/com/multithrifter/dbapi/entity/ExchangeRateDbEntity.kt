@@ -1,4 +1,4 @@
-package com.multithrifter.dbapi.dto
+package com.multithrifter.dbapi.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,21 +6,21 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = ExchangeRateDto.TABLE_NAME,
+    tableName = ExchangeRateDbEntity.TABLE_NAME,
     foreignKeys = [
         ForeignKey(
-            entity = Currency::class,
+            entity = CurrencyDbEntity::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("source_currency_id"),
         ),
         ForeignKey(
-            entity = Currency::class,
+            entity = CurrencyDbEntity::class,
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("target_currency_id"),
         ),
     ],
 )
-data class ExchangeRateDto(
+data class ExchangeRateDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val rate: Float,
     val date: Long,

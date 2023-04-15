@@ -6,5 +6,6 @@ data class AccountDto(
     val balance: Float,
     val currencyId: String,
     val currencyName: String,
+    val currencyShortName: String,
     val currencySymbol: String,
 )
