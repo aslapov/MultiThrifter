@@ -6,6 +6,7 @@ import com.multithrifter.accounts.di.AccountsComponent
 import com.multithrifter.core.CoreApplication
 import com.multithrifter.core.di.ModuleDependenciesProvider
 import com.multithrifter.core.extensions.demand
+import com.multithrifter.db.DatabaseProviderFactory
 
 object AccountsFeature {
 
@@ -15,9 +16,11 @@ object AccountsFeature {
     fun getApi(): AccountsApi = component().getApi()
 
     private var accountsComponent: AccountsComponent? by demand {
+        val coreComponent = CoreApplication.app.coreComponent
         DaggerAccountsComponent.builder()
-            .coreComponent(CoreApplication.app.coreComponent)
+            .coreComponent(coreComponent)
             .accountsDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
+            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
             .build()
     }
 
@@ -30,4 +33,15 @@ object AccountsFeature {
     }
 }
 
-interface AccountsDependencies
+interface AccountsDependencies {
+    fun getCreateAccountActions(): CreateAccountActions
+    fun getEditAccountActions(): EditAccountActions
+}
+
+interface CreateAccountActions {
+    fun showCreateAccountScreen()
+}
+
+interface EditAccountActions {
+    fun showEditAccountScreen()
+}

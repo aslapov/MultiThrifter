@@ -2,5 +2,6 @@ package com.multithrifter.accounts.presentation.navigation
 
 interface Router {
     fun showAccountsScreen()
-    fun onBack()
+    fun showCreateAccountScreen()
+    fun showEditAccountScreen()
 }

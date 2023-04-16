@@ -1,8 +1,6 @@
 package com.multithrifter.dbapi.dto
 
-data class CurrencyRateDto(
-    val rate: Float,
-    val date: Long,
+data class ExchangeRateDto(
     val sourceCurrencyId: String,
     val sourceCurrencyName: String,
     val sourceCurrencyShortName: String,
@@ -11,4 +9,6 @@ data class CurrencyRateDto(
     val targetCurrencyName: String,
     val targetCurrencyShortName: String,
     val targetCurrencySymbol: String,
+    val rate: Float,
+    val date: Long,
 )

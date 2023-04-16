@@ -25,7 +25,13 @@ class DependenciesCommonConfigurator : ProjectConfigurator {
                 ignoreFor(MultiThrifterModule.Core)
             }
 
-            implementation(MultiThrifterModule.Core)
+            implementation(MultiThrifterModule.Core) {
+                ignoreFor(MultiThrifterModule.Ui)
+            }
+
+            if (this.project.name !in Exclusions.COMPOSE) {
+                implementation(MultiThrifterModule.Ui)
+            }
 
             testLibs()
 

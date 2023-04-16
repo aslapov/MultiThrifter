@@ -143,12 +143,17 @@ object Android {
 
 object Exclusions {
     val KAPT = setOf(
+        MultiThrifterModule.App.name,
         MultiThrifterModule.Coretest.name,
+        MultiThrifterModule.Ui.name,
+        MultiThrifterModule.Network.name,
+        MultiThrifterModule.Networkapi.name,
+        MultiThrifterModule.Db.name,
+        MultiThrifterModule.Dbapi.name,
     )
 
     val COMPOSE = setOf(
         MultiThrifterModule.App.name,
-        MultiThrifterModule.Main.name,
         MultiThrifterModule.Network.name,
         MultiThrifterModule.Networkapi.name,
         MultiThrifterModule.Networkimpl.name,
@@ -156,5 +161,6 @@ object Exclusions {
         MultiThrifterModule.Dbapi.name,
         MultiThrifterModule.Dbimpl.name,
         MultiThrifterModule.Coretest.name,
+        MultiThrifterModule.Main.name,
     )
 }

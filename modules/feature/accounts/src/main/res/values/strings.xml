@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accounts">Счета</string>
+    <string name="transfers">Переводы</string>
+    <string name="total">Всего</string>
+    <string name="total_amount">Общая сумма</string>
+</resources>

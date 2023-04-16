@@ -8,6 +8,7 @@ import com.multithrifter.dbapi.MultiThrifterDatabaseContract
 import com.multithrifter.dbapi.dao.AccountsDao
 import com.multithrifter.dbapi.dao.CurrencyDao
 import com.multithrifter.dbapi.dao.RatesDao
+import com.multithrifter.dbapi.entity.AccountDbEntity
 import com.multithrifter.dbapi.entity.CurrencyDbEntity
 import dagger.Module
 import dagger.Provides
@@ -59,5 +60,7 @@ class DatabaseModule {
         db.execSQL("INSERT INTO ${CurrencyDbEntity.TABLE_NAME} VALUES ('USD', 'доллар США', 'доллар', '$')")
         db.execSQL("INSERT INTO ${CurrencyDbEntity.TABLE_NAME} VALUES ('EUR', 'евро', 'евро', '€')")
         db.execSQL("INSERT INTO ${CurrencyDbEntity.TABLE_NAME} VALUES ('GEL', 'грузинский лари', 'лари', '₾')")
+
+        db.execSQL("INSERT INTO ${AccountDbEntity.TABLE_NAME} VALUES (0, 'Мои деньги', 0f, 'RUB')")
     }
 }
