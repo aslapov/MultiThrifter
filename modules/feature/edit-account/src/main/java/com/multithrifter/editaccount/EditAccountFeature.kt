@@ -22,7 +22,7 @@ object EditAccountFeature {
         DaggerEditAccountComponent.builder()
             .coreComponent(coreComponent)
             .editAccountDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
-            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+            .databaseProvider(DatabaseProviderFactory.getDatabaseProvider(coreComponent))
             .build()
     }
 

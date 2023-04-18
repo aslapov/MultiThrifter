@@ -21,7 +21,7 @@ object AccountsFeature {
         DaggerAccountsComponent.builder()
             .coreComponent(coreComponent)
             .accountsDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
-            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+            .databaseProvider(DatabaseProviderFactory.getDatabaseProvider(coreComponent))
             .build()
     }
 

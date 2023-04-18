@@ -6,9 +6,13 @@ import com.multithrifter.dbimpl.DaggerDatabaseComponent
 
 object DatabaseProviderFactory {
 
-    fun createDatabaseProvider(coreComponent: CoreComponent): DatabaseProvider {
-        return DaggerDatabaseComponent.builder()
+    private var databaseProvider: DatabaseProvider? = null
+
+    fun getDatabaseProvider(coreComponent: CoreComponent) = databaseProvider ?: run {
+        databaseProvider = DaggerDatabaseComponent.builder()
             .coreComponent(coreComponent)
             .build()
+
+        requireNotNull(databaseProvider)
     }
 }

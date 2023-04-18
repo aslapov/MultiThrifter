@@ -20,7 +20,7 @@ object SelectCurrencyFeature {
             component = DaggerSelectCurrencyComponent.builder()
                 .coreComponent(coreComponent)
                 .selectedCurrencyListener(selectedCurrencyListener)
-                .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+                .databaseProvider(DatabaseProviderFactory.getDatabaseProvider(coreComponent))
                 .build()
 
             return requireNotNull(component).getApi()

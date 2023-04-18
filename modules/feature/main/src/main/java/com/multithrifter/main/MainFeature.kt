@@ -16,7 +16,7 @@ object MainFeature {
         DaggerMainComponent.builder()
             .coreComponent(coreComponent)
             .mainDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
-            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+            .databaseProvider(DatabaseProviderFactory.getDatabaseProvider(coreComponent))
             .networkProvider(NetworkProviderFactory.createNetworkProvider(coreComponent))
             .build()
     }

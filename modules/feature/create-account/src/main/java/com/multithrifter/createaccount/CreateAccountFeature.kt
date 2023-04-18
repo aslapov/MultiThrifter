@@ -22,7 +22,7 @@ object CreateAccountFeature {
         DaggerCreateAccountComponent.builder()
             .coreComponent(coreComponent)
             .createAccountDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
-            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+            .databaseProvider(DatabaseProviderFactory.getDatabaseProvider(coreComponent))
             .build()
     }
 
