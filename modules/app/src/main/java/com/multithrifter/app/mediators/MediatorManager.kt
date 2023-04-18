@@ -9,4 +9,5 @@ object MediatorManager {
     val createAccountMediator: CreateAccountMediator = CreateAccountMediator()
     val expensesMediator: ExpensesMediator = ExpensesMediator()
     val incomesMediator: IncomesMediator = IncomesMediator()
+    val selectCurrencyMediator: SelectCurrencyMediator = SelectCurrencyMediator()
 }

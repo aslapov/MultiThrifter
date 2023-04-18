@@ -15,7 +15,7 @@ internal object CreateAccountContract {
 
     sealed class AccountEvent : UiEvent {
         object CancelClicked : AccountEvent()
-        object CurrencyClicked : AccountEvent()
+        data class CurrencyClicked(val selectedCurrency: Currency) : AccountEvent()
         object ValidationNotificationShown : AccountEvent()
         data class NameChanged(val name: String) : AccountEvent()
         data class BalanceChanged(val balance: String) : AccountEvent()

@@ -1,5 +1,6 @@
 package com.multithrifter.createaccount.presentation.navigation
 
+import com.multithrifter.core.domain.entity.Currency
 import com.multithrifter.core.navigation.GlobalNavigator
 import com.multithrifter.createaccount.CurrenciesActions
 import com.multithrifter.createaccount.presentation.ui.CreateAccountFragment
@@ -14,8 +15,8 @@ internal class RouterImpl @Inject constructor(
         navigator.openFullScreenFragment(CreateAccountFragment.newInstance(), true)
     }
 
-    override fun showCurrenciesScreen() {
-        currenciesActions.showCurrenciesScreen()
+    override fun showCurrenciesScreen(selectedCurrency: Currency?) {
+        currenciesActions.showCurrenciesScreen(selectedCurrency)
     }
 
     override fun onBack() = navigator.back()

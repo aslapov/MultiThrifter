@@ -12,3 +12,7 @@ fun Fragment.composeView(content: @Composable () -> Unit): View {
         setContent(content)
     }
 }
+
+inline fun <reified T : Any> Fragment.getRequiredArgument(key: String): T {
+    return requireArguments().getRequiredValue(key)
+}

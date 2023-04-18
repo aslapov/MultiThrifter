@@ -1,4 +1,4 @@
-package com.multithrifter.createaccount.data.mapper
+package com.multithrifter.selectcurrency.data.mapper
 
 import com.multithrifter.core.domain.entity.Currency
 import com.multithrifter.core.mapper.Mapper

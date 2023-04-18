@@ -6,8 +6,6 @@ import com.multithrifter.core.di.ViewModelKey
 import com.multithrifter.core.di.ViewModelModule
 import com.multithrifter.createaccount.CreateAccountApi
 import com.multithrifter.createaccount.CreateAccountApiImpl
-import com.multithrifter.createaccount.data.mapper.CurrencyMapper
-import com.multithrifter.createaccount.data.mapper.CurrencyMapperImpl
 import com.multithrifter.createaccount.data.repo.CreateAccountRepositoryImpl
 import com.multithrifter.createaccount.domain.interactor.CreateAccountInteractor
 import com.multithrifter.createaccount.domain.interactor.CreateAccountInteractorImpl
@@ -42,8 +40,4 @@ internal interface CreateAccountModule {
     @Binds
     @ModuleScope
     fun bindRepository(repository: CreateAccountRepositoryImpl): CreateAccountRepository
-
-    @Binds
-    @ModuleScope
-    fun bindCurrencyMapper(mapper: CurrencyMapperImpl): CurrencyMapper
 }

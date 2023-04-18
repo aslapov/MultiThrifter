@@ -3,6 +3,7 @@ package com.multithrifter.createaccount
 import androidx.annotation.MainThread
 import com.multithrifter.core.CoreApplication
 import com.multithrifter.core.di.ModuleDependenciesProvider
+import com.multithrifter.core.domain.entity.Currency
 import com.multithrifter.core.extensions.demand
 import com.multithrifter.createaccount.di.CreateAccountComponent
 import com.multithrifter.createaccount.di.DaggerCreateAccountComponent
@@ -38,6 +39,6 @@ interface CreateAccountDependencies {
 }
 
 interface CurrenciesActions {
-    fun showCurrenciesScreen()
+    fun showCurrenciesScreen(selectedCurrency: Currency? = null)
 }
 

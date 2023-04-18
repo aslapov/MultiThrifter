@@ -22,12 +22,16 @@ internal class CreateAccountViewModel @Inject constructor(
     private val interactor: CreateAccountInteractor,
 ) : CoreViewModel<AccountState, AccountEvent>() {
 
+    init {
+        subscribeSelectedCurrency()
+    }
+
     override fun createInitialState() = AccountState()
 
     override fun handleEvent(event: AccountEvent) {
         when (event) {
             CancelClicked -> router.onBack()
-            CurrencyClicked -> router.showCurrenciesScreen()
+            is CurrencyClicked -> router.showCurrenciesScreen(event.selectedCurrency)
             ValidationNotificationShown -> resetNotificationState()
             SaveClicked -> saveClicked()
             is NameChanged -> nameChanged(event.name)
@@ -69,5 +73,13 @@ internal class CreateAccountViewModel @Inject constructor(
 
     private fun resetNotificationState() {
         setState { copy(showValidationNotification = false) }
+    }
+    
+    private fun subscribeSelectedCurrency() {
+        viewModelScope.launch {
+            interactor.selectedCurrency.collect { selectedCurrency ->
+                setState { copy(selectedCurrency = selectedCurrency) }
+            }
+        }
     }
 }
