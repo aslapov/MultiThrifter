@@ -50,7 +50,8 @@ internal class AccountsViewModel @Inject constructor(
     private fun getTotalsByCurrency() {
         viewModelScope.launch {
             interactor.totalsByCurrencyFlow.collect { totals ->
-                setState { copy(totalsByCurrency = totals, isLoading = false) }
+                val totalsByCurrency = totals.takeIf { it.size > 1 } ?: emptyList()
+                setState { copy(totalsByCurrency = totalsByCurrency, isLoading = false) }
             }
         }
     }

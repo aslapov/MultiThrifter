@@ -1,6 +1,5 @@
 package com.multithrifter.main.data.repo
 
-import android.util.Log
 import com.multithrifter.core.extensions.isSameDate
 import com.multithrifter.core.extensions.toDate
 import com.multithrifter.core.preferences.CorePreferences
@@ -24,7 +23,6 @@ internal class MainRepositoryImpl @Inject constructor(
         val now = Date()
 
         if (!now.isSameDate(lastTime)) {
-            Log.d("OLOLO", "OLOLO rates network request")
             val currencies = currencyDao.getCurrencies().map { it.id }.toSet()
 
             currencies.forEach { targetCurrencyId ->

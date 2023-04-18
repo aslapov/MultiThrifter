@@ -61,6 +61,6 @@ class DatabaseModule {
         db.execSQL("INSERT INTO ${CurrencyDbEntity.TABLE_NAME} VALUES ('EUR', 'евро', 'евро', '€')")
         db.execSQL("INSERT INTO ${CurrencyDbEntity.TABLE_NAME} VALUES ('GEL', 'грузинский лари', 'лари', '₾')")
 
-        db.execSQL("INSERT INTO ${AccountDbEntity.TABLE_NAME} VALUES (0, 'Мои деньги', 0f, 'RUB')")
+        db.execSQL("INSERT INTO ${AccountDbEntity.TABLE_NAME} VALUES (0, 'Мои деньги', 0, 'RUB')")
     }
 }

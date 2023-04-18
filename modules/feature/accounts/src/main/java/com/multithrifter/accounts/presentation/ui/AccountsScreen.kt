@@ -174,41 +174,45 @@ private fun AccountsMenuContent(
                     },
             )
         }
-        item {
-            Text(
-                text = stringResource(id = R.string.total),
-                color = MultiThrifterColors.Primary,
-                textDecoration = TextDecoration.Underline,
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-            )
+        if (totals.isNotEmpty()) {
+            item {
+                Text(
+                    text = stringResource(id = R.string.total),
+                    color = MultiThrifterColors.Primary,
+                    textDecoration = TextDecoration.Underline,
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
+            items(totals) { total ->
+                TotalItem(
+                    total = total,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
         }
-        items(totals) { total ->
-            TotalItem(
-                total = total,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-            )
-        }
-        item {
-            Text(
-                text = stringResource(id = R.string.total_amount),
-                color = MultiThrifterColors.Primary,
-                textDecoration = TextDecoration.Underline,
-                style = MaterialTheme.typography.body1,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-            )
-        }
-        items(totalsByCurrency) { total ->
-            TotalItem(
-                total = total,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-            )
+        if (totalsByCurrency.isNotEmpty()) {
+            item {
+                Text(
+                    text = stringResource(id = R.string.total_amount),
+                    color = MultiThrifterColors.Primary,
+                    textDecoration = TextDecoration.Underline,
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
+            items(totalsByCurrency) { total ->
+                TotalItem(
+                    total = total,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
         }
         item {
             Spacer(modifier = Modifier.height(140.dp))
