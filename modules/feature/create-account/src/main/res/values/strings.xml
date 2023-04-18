@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_account">Новый счет</string>
+    <string name="new_account_cancel">Отмена</string>
+    <string name="new_account_save">Сохранить</string>
+    <string name="new_account_name">Название</string>
+    <string name="new_account_balance">Баланс</string>
+    <string name="new_account_currency">Валюта</string>
+    <string name="new_account_message">Необходимо ввести название счета</string>
+</resources>

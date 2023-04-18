@@ -43,7 +43,7 @@ internal interface AccountsModule {
     @Binds
     @IntoMap
     @ViewModelKey(AccountsViewModel::class)
-    fun bindMainViewModel(viewModel: AccountsViewModel): ViewModel
+    fun bindAccountsViewModel(viewModel: AccountsViewModel): ViewModel
 
     @Binds
     @ModuleScope

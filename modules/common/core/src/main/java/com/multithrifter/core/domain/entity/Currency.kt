@@ -5,4 +5,8 @@ data class Currency(
     val name: String,
     val shortName: String,
     val symbol: String,
-)
+) {
+    companion object {
+        fun default() = Currency("RUB", "российский рубль", "рубль", "₽")
+    }
+}

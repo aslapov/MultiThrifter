@@ -5,6 +5,7 @@ import com.multithrifter.accounts.di.DaggerAccountsComponent
 import com.multithrifter.accounts.di.AccountsComponent
 import com.multithrifter.core.CoreApplication
 import com.multithrifter.core.di.ModuleDependenciesProvider
+import com.multithrifter.core.domain.entity.Account
 import com.multithrifter.core.extensions.demand
 import com.multithrifter.db.DatabaseProviderFactory
 
@@ -43,5 +44,5 @@ interface CreateAccountActions {
 }
 
 interface EditAccountActions {
-    fun showEditAccountScreen()
+    fun showEditAccountScreen(account: Account)
 }

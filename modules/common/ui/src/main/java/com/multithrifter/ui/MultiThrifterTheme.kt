@@ -31,7 +31,7 @@ fun MultiThrifterTheme(
             secondaryVariant = MultiThrifterColors.secondary,
             background = MultiThrifterColors.background,
             surface = MultiThrifterColors.background,
-            error = Color(0xFFB00020),
+            error = MultiThrifterColors.backgroundError,
             onPrimary = Color.White,
             onSecondary = Color.Black,
             onBackground = Color.Black,

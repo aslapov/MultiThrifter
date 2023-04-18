@@ -27,7 +27,7 @@ internal class AccountsViewModel @Inject constructor(
     override fun handleEvent(event: AccountsEvent) {
         when (event) {
             CreateAccountClicked -> router.showCreateAccountScreen()
-            AccountClicked -> router.showEditAccountScreen()
+            is AccountClicked -> router.showEditAccountScreen(event.account)
         }
     }
 

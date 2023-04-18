@@ -1,6 +1,7 @@
 package com.multithrifter.accounts.presentation.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ import com.multithrifter.ui.MultiThrifterTheme
 internal fun AccountsScreen(
     state: AccountsState,
     onClickCreateAccount: () -> Unit,
+    onClickAccount: (Account) -> Unit,
 ) {
     var isTransfersMenu by remember { mutableStateOf(false) }
 
@@ -68,6 +70,7 @@ internal fun AccountsScreen(
                 accounts = state.accounts,
                 totals = state.totals,
                 totalsByCurrency = state.totalsByCurrency,
+                onClickAccount = onClickAccount,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
@@ -152,6 +155,7 @@ private fun AccountsMenuContent(
     accounts: List<Account>,
     totals: List<TotalEntity>,
     totalsByCurrency: List<TotalEntity>,
+    onClickAccount: (Account) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -163,6 +167,7 @@ private fun AccountsMenuContent(
                 account = account,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable { onClickAccount(account) }
                     .conditional(index % 2 != 0) {
                         background(MultiThrifterColors.secondary)
                     },
@@ -250,7 +255,7 @@ private fun TotalItem(
 @Composable
 private fun AccountsScreenPreview() {
     val currency = Currency("RUB", "russian ruble", "ruble", "₽")
-    val account = Account(0, "account", 1000f, currency)
+    val account = Account("account", 1000f, currency)
     val total = TotalEntity(2000f, currency)
     MultiThrifterTheme {
         AccountsScreen(
@@ -261,6 +266,7 @@ private fun AccountsScreenPreview() {
                 totalsByCurrency = listOf(total, total),
             ),
             onClickCreateAccount = {},
+            onClickAccount = {},
         )
     }
 }

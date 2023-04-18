@@ -5,7 +5,7 @@ import com.multithrifter.core.domain.entity.Account
 import com.multithrifter.core.viewmodel.UiEvent
 import com.multithrifter.core.viewmodel.UiState
 
-object AccountsContract {
+internal object AccountsContract {
 
     data class AccountsState(
         val accounts: List<Account> = emptyList(),
@@ -16,6 +16,6 @@ object AccountsContract {
 
     sealed class AccountsEvent : UiEvent {
         object CreateAccountClicked : AccountsEvent()
-        object AccountClicked : AccountsEvent()
+        data class AccountClicked(val account: Account) : AccountsEvent()
     }
 }

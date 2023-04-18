@@ -7,4 +7,5 @@ object MultiThrifterColors {
     val background: Color = Color(0xFFCDCDCD)
     val middleGray: Color = Color(0xFF707070)
     val secondary: Color = Color(0xFFB3B3B3)
+    val backgroundError: Color = Color(0xFFCD5A50)
 }

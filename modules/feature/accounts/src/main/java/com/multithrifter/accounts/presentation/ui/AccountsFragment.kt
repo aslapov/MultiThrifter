@@ -8,6 +8,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.fragment.app.viewModels
 import com.multithrifter.accounts.AccountsFeature
 import com.multithrifter.accounts.presentation.viewmodel.AccountsContract.AccountsEvent
+import com.multithrifter.accounts.presentation.viewmodel.AccountsContract.AccountsEvent.AccountClicked
+import com.multithrifter.accounts.presentation.viewmodel.AccountsContract.AccountsEvent.CreateAccountClicked
 import com.multithrifter.accounts.presentation.viewmodel.AccountsContract.AccountsState
 import com.multithrifter.accounts.presentation.viewmodel.AccountsViewModel
 import com.multithrifter.core.extensions.composeView
@@ -33,7 +35,8 @@ internal class AccountsFragment : CoreFragment<AccountsState, AccountsEvent, Acc
             MultiThrifterTheme {
                 AccountsScreen(
                     state = viewModel.uiState.collectAsState().value,
-                    onClickCreateAccount = {},
+                    onClickCreateAccount = { viewModel.handleEvent(CreateAccountClicked) },
+                    onClickAccount = { viewModel.handleEvent(AccountClicked(it)) },
                 )
             }
         }

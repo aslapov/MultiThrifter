@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
         true
     }
 
+    private val fullscreenFragments = mutableSetOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -58,6 +60,18 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
             dependencies.getExpensesActions().showExpensesScreen()
             setOnItemSelectedListener(listener)
         }
+
+        supportFragmentManager.apply {
+            addOnBackStackChangedListener {
+                val backStackEntryCount = backStackEntryCount
+                binding.bottomNavigation.isVisible = if (backStackEntryCount > 0) {
+                    val entry = getBackStackEntryAt(backStackEntryCount - 1)
+                    !fullscreenFragments.contains(entry.name)
+                } else {
+                    true
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -65,7 +79,10 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
     }
     override fun onBack() {
         val fm = supportFragmentManager
-        if (fm.backStackEntryCount > 0) {
+        val backStackEntryCount = fm.backStackEntryCount
+        if (backStackEntryCount > 0) {
+            val entry = fm.getBackStackEntryAt(backStackEntryCount - 1)
+            fullscreenFragments.remove(entry.name)
             fm.popBackStack()
         } else {
             onExit()
@@ -93,7 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
         addToBackStack: Boolean,
         customAnimations: TransitionAnimationSet?
     ) {
-        binding.bottomNavigation.isVisible = false
+        fullscreenFragments.add(fragment.javaClass.name)
         openFragment(fragment, addToBackStack, customAnimations)
     }
 
@@ -103,8 +120,6 @@ class MainActivity : AppCompatActivity(), NavigationHandler {
         customAnimations: TransitionAnimationSet?
     ) {
         val tag = fragment.javaClass.name
-        binding.bottomNavigation.isVisible = true
-
         supportFragmentManager.beginTransaction().apply {
             customAnimations?.let { animations ->
                 setCustomAnimations(animations.enter, animations.exit, animations.popEnter, animations.popExit)
