@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_account">Счет</string>
+    <string name="edit_account_cancel">Отмена</string>
+    <string name="edit_account_save">Сохранить</string>
+    <string name="edit_account_name">Название</string>
+    <string name="edit_account_balance">Баланс</string>
+    <string name="edit_account_currency">Валюта</string>
+    <string name="edit_account_message">Необходимо ввести название счета</string>
+    <string name="edit_account_delete">Удалить</string>
+</resources>

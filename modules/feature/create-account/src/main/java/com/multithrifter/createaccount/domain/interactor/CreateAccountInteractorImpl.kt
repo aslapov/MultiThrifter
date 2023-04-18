@@ -9,5 +9,4 @@ internal class CreateAccountInteractorImpl @Inject constructor(
 ) : CreateAccountInteractor {
 
     override suspend fun createAccount(account: Account) = repository.createAccount(account)
-    override val selectedCurrency = repository.selectedCurrency
 }

@@ -9,8 +9,8 @@ internal class RouterImpl @Inject constructor(
     private val navigator: GlobalNavigator,
 ) : Router {
 
-    override fun showSelectCurrencyScreen(selectedCurrency: Currency?) {
-        navigator.openFullScreenFragment(SelectCurrencyFragment.newInstance(selectedCurrency), true)
+    override fun showSelectCurrencyScreen(currency: Currency?) {
+        navigator.openFullScreenFragment(SelectCurrencyFragment.newInstance(currency), true)
     }
 
     override fun onBack() = navigator.back()

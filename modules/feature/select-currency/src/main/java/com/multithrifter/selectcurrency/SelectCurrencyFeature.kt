@@ -2,42 +2,33 @@ package com.multithrifter.selectcurrency
 
 import androidx.annotation.MainThread
 import com.multithrifter.core.CoreApplication
-import com.multithrifter.core.di.ModuleDependenciesProvider
 import com.multithrifter.core.domain.entity.Currency
-import com.multithrifter.core.extensions.demand
 import com.multithrifter.db.DatabaseProviderFactory
 import com.multithrifter.selectcurrency.di.DaggerSelectCurrencyComponent
 import com.multithrifter.selectcurrency.di.SelectCurrencyComponent
+import com.multithrifter.selectcurrency.presentation.ui.SelectCurrencyFragment
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 object SelectCurrencyFeature {
 
-    var dependenciesProvider: ModuleDependenciesProvider<SelectCurrencyDependencies>? = null
+    private var component: SelectCurrencyComponent? = null
 
     @MainThread
-    fun getApi(): SelectCurrencyApi = component().getApi()
+    fun getApi(selectedCurrencyListener: MutableSharedFlow<Currency>): SelectCurrencyApi =
+        component?.getApi() ?: run {
+            val coreComponent = CoreApplication.app.coreComponent
+            component = DaggerSelectCurrencyComponent.builder()
+                .coreComponent(coreComponent)
+                .selectedCurrencyListener(selectedCurrencyListener)
+                .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
+                .build()
 
-    private var selectCurrencyComponent: SelectCurrencyComponent? by demand {
-        val coreComponent = CoreApplication.app.coreComponent
-        DaggerSelectCurrencyComponent.builder()
-            .coreComponent(coreComponent)
-            .selectCurrencyDependencies(requireNotNull(dependenciesProvider?.getDependencies()))
-            .databaseProvider(DatabaseProviderFactory.createDatabaseProvider(coreComponent))
-            .build()
-    }
+            return requireNotNull(component).getApi()
+        }
 
-    internal fun component(): SelectCurrencyComponent {
-        return requireNotNull(selectCurrencyComponent)
-    }
+    internal fun inject(fragment: SelectCurrencyFragment) = requireNotNull(component).inject(fragment)
 
     internal fun destroyComponent() {
-        selectCurrencyComponent = null
+        component = null
     }
-}
-
-interface SelectCurrencyDependencies {
-    fun getSelectedCurrencyListenerActions(): SelectedCurrencyListenerActions
-}
-
-interface SelectedCurrencyListenerActions {
-    fun updateSelectedCurrency(currency: Currency)
 }

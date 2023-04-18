@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -208,6 +209,9 @@ private fun AccountsMenuContent(
                 total = total,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
+        }
+        item {
+            Spacer(modifier = Modifier.height(140.dp))
         }
     }
 }

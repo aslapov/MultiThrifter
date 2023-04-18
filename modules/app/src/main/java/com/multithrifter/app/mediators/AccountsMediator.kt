@@ -33,7 +33,7 @@ class AccountsMediator {
             override fun getEditAccountActions(): EditAccountActions {
                 return object : EditAccountActions {
                     override fun showEditAccountScreen(account: Account) {
-
+                        MediatorManager.editAccountMediator.getApi().showEditAccountScreen(account)
                     }
                 }
             }

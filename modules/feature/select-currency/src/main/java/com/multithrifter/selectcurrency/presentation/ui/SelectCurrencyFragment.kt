@@ -18,27 +18,28 @@ import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyCon
 import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyViewModel
 import com.multithrifter.ui.MultiThrifterTheme
 
-internal class SelectCurrencyFragment : CoreFragment<SelectCurrencyState, SelectCurrencyEvent, SelectCurrencyViewModel>() {
+internal class SelectCurrencyFragment :
+    CoreFragment<SelectCurrencyState, SelectCurrencyEvent, SelectCurrencyViewModel>() {
 
     companion object {
-        private const val SELECTED_CURRENCY_KEY = "SELECTED_CURRENCY_KEY"
+        private const val CURRENCY_KEY = "CURRENCY_KEY"
 
         fun newInstance(
-            selectedCurrency: Currency? = null,
+            currency: Currency? = null,
         ): SelectCurrencyFragment = SelectCurrencyFragment().apply {
-            selectedCurrency?.let { currency ->
-                arguments = bundleOf(SELECTED_CURRENCY_KEY to currency)
+            currency?.let { currency ->
+                arguments = bundleOf(CURRENCY_KEY to currency)
             }
         }
     }
 
     override val viewModel: SelectCurrencyViewModel by viewModels { viewModelFactory }
 
-    override fun setupInjection() = SelectCurrencyFeature.component().inject(this)
+    override fun setupInjection() = SelectCurrencyFeature.inject(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.handleEvent(Initialize(getRequiredArgument(SELECTED_CURRENCY_KEY)))
+        viewModel.handleEvent(Initialize(getRequiredArgument(CURRENCY_KEY)))
     }
 
     override fun onCreateView(

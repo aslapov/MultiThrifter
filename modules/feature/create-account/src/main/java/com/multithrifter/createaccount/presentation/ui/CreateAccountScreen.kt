@@ -7,7 +7,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
@@ -51,6 +50,7 @@ import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContr
 import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContract.AccountEvent.ValidationNotificationShown
 import com.multithrifter.ui.MultiThrifterColors
 import com.multithrifter.ui.MultiThrifterTheme
+import com.multithrifter.ui.R as UiR
 import kotlinx.coroutines.delay
 
 private const val MESSAGE_SHOW_TIME = 5000
@@ -183,7 +183,7 @@ private fun SelectCurrencyItem(
         },
         trailingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_chevron),
+                painter = painterResource(id = UiR.drawable.ic_chevron),
                 contentDescription = null,
             )
         },

@@ -8,7 +8,7 @@ internal class SelectCurrencyApiImpl @Inject constructor(
     private val router: Router,
 ): SelectCurrencyApi {
 
-    override fun showSelectCurrencyScreen(selectedCurrency: Currency?) {
-        router.showSelectCurrencyScreen(selectedCurrency)
+    override fun showSelectCurrencyScreen(currency: Currency?) {
+        router.showSelectCurrencyScreen(currency)
     }
 }

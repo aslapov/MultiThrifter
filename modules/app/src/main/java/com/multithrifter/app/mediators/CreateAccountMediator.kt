@@ -6,6 +6,7 @@ import com.multithrifter.core.domain.entity.Currency
 import com.multithrifter.createaccount.CreateAccountDependencies
 import com.multithrifter.createaccount.CreateAccountFeature
 import com.multithrifter.createaccount.CurrenciesActions
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 class CreateAccountMediator {
 
@@ -22,8 +23,12 @@ class CreateAccountMediator {
         return object : CreateAccountDependencies {
             override fun getCurrenciesActions(): CurrenciesActions {
                 return object : CurrenciesActions {
-                    override fun showCurrenciesScreen(selectedCurrency: Currency?) {
-                        MediatorManager.selectCurrencyMediator.getApi().showSelectCurrencyScreen(selectedCurrency)
+                    override fun showCurrenciesScreen(
+                        selectedCurrencyListener: MutableSharedFlow<Currency>,
+                        selectedCurrency: Currency?,
+                    ) {
+                        MediatorManager.selectCurrencyMediator.getApi(selectedCurrencyListener)
+                            .showSelectCurrencyScreen(selectedCurrency)
                     }
                 }
             }

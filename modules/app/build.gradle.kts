@@ -6,6 +6,7 @@ dependencies {
     implementation(project(MultiThrifterModule.Networkapi.path))
     implementation(project(MultiThrifterModule.Accounts.path))
     implementation(project(MultiThrifterModule.Createaccount.path))
+    implementation(project(MultiThrifterModule.Editaccount.path))
     implementation(project(MultiThrifterModule.Expenses.path))
     implementation(project(MultiThrifterModule.Incomes.path))
     implementation(project(MultiThrifterModule.Selectcurrency.path))

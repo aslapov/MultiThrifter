@@ -3,7 +3,6 @@ package com.multithrifter.selectcurrency.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.multithrifter.core.domain.entity.Currency
 import com.multithrifter.core.viewmodel.CoreViewModel
-import com.multithrifter.selectcurrency.SelectedCurrencyListenerActions
 import com.multithrifter.selectcurrency.domain.interactor.SelectCurrencyInteractor
 import com.multithrifter.selectcurrency.presentation.navigation.Router
 import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyContract.SelectCurrencyEvent
@@ -11,13 +10,14 @@ import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyCon
 import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyContract.SelectCurrencyEvent.CurrencySelected
 import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyContract.SelectCurrencyEvent.Initialize
 import com.multithrifter.selectcurrency.presentation.viewmodel.SelectCurrencyContract.SelectCurrencyState
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class SelectCurrencyViewModel @Inject constructor(
     private val interactor: SelectCurrencyInteractor,
     private val router: Router,
-    private val selectedCurrencyListenerActions: SelectedCurrencyListenerActions,
+    private val selectedCurrencyListener: MutableSharedFlow<Currency>,
 ) : CoreViewModel<SelectCurrencyState, SelectCurrencyEvent>() {
 
     init {
@@ -46,8 +46,10 @@ internal class SelectCurrencyViewModel @Inject constructor(
     }
 
     private fun currencySelected(currency: Currency) {
-        selectedCurrencyListenerActions.updateSelectedCurrency(currency)
-        navigateBack()
+        viewModelScope.launch {
+            selectedCurrencyListener.emit(currency)
+            navigateBack()
+        }
     }
 
     private fun navigateBack() {

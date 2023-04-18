@@ -8,6 +8,7 @@ import com.multithrifter.core.extensions.demand
 import com.multithrifter.createaccount.di.CreateAccountComponent
 import com.multithrifter.createaccount.di.DaggerCreateAccountComponent
 import com.multithrifter.db.DatabaseProviderFactory
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 object CreateAccountFeature {
 
@@ -39,6 +40,9 @@ interface CreateAccountDependencies {
 }
 
 interface CurrenciesActions {
-    fun showCurrenciesScreen(selectedCurrency: Currency? = null)
+    fun showCurrenciesScreen(
+        selectedCurrencyListener: MutableSharedFlow<Currency>,
+        selectedCurrency: Currency? = null,
+    )
 }
 

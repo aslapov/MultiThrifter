@@ -14,6 +14,7 @@ import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContr
 import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContract.AccountEvent.SaveClicked
 import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContract.AccountEvent.ValidationNotificationShown
 import com.multithrifter.createaccount.presentation.viewmodel.CreateAccountContract.AccountState
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +22,8 @@ internal class CreateAccountViewModel @Inject constructor(
     private val router: Router,
     private val interactor: CreateAccountInteractor,
 ) : CoreViewModel<AccountState, AccountEvent>() {
+
+    private val selectedCurrencyListener = MutableSharedFlow<Currency>()
 
     init {
         subscribeSelectedCurrency()
@@ -31,7 +34,7 @@ internal class CreateAccountViewModel @Inject constructor(
     override fun handleEvent(event: AccountEvent) {
         when (event) {
             CancelClicked -> router.onBack()
-            is CurrencyClicked -> router.showCurrenciesScreen(event.selectedCurrency)
+            is CurrencyClicked -> currencyClicked(event.selectedCurrency)
             ValidationNotificationShown -> resetNotificationState()
             SaveClicked -> saveClicked()
             is NameChanged -> nameChanged(event.name)
@@ -56,6 +59,10 @@ internal class CreateAccountViewModel @Inject constructor(
         }
     }
 
+    private fun currencyClicked(currency: Currency) {
+        router.showCurrenciesScreen(selectedCurrencyListener, currency)
+    }
+
     private fun validate(): Boolean {
         return currentState.name.isNotEmpty() && runCatching { currentState.balance.toFloat() }.isSuccess
     }
@@ -77,7 +84,7 @@ internal class CreateAccountViewModel @Inject constructor(
     
     private fun subscribeSelectedCurrency() {
         viewModelScope.launch {
-            interactor.selectedCurrency.collect { selectedCurrency ->
+            selectedCurrencyListener.collect { selectedCurrency ->
                 setState { copy(selectedCurrency = selectedCurrency) }
             }
         }
