@@ -4,6 +4,7 @@ import Versions
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -25,12 +26,14 @@ class AndroidSettingsCommonConfigurator : ProjectConfigurator {
                 buildTypesConfiguration()
                 compileOptionsConfiguration()
                 composeConfiguration(project)
+                testOptionsConfiguration()
             }
         } else {
             project.logger.error("Failed to configure android settings for ${project.name} module")
         }
         kotlinOptionsConfiguration(project)
         configureKapt(project)
+        configureUnitTests(project)
     }
 
     /**
@@ -111,6 +114,28 @@ class AndroidSettingsCommonConfigurator : ProjectConfigurator {
         } else {
             // kaptExtension - null, если плагин капт в модуле не подключен
             project.logger.debug("Module ${project.name} has no kapt dependencies")
+        }
+    }
+
+    private fun BaseExtension.testOptionsConfiguration() {
+        testOptions {
+            execution = "ANDROIDX_TEST_ORCHESTRATOR"
+            unitTests.isReturnDefaultValues = true
+            unitTests.all {
+                it.jvmArgs("-Duser.language=ru", "-Duser.country=RU", "-Duser.timezone=Europe/Moscow")
+            }
+        }
+    }
+
+    /**
+     * конфигурация тасок юнит-тестов
+     */
+    private fun configureUnitTests(project: Project) {
+        project.tasks.withType<Test> {
+            // чтобы тесты работали с Jupiter / JUnit5
+            useJUnitPlatform()
+            // чтобы тесты работали на java 11
+            jvmArgs("--add-opens", "java.base/jdk.internal.loader=ALL-UNNAMED")
         }
     }
 }
