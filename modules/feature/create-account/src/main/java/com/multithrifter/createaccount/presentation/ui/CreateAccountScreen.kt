@@ -32,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -88,7 +89,8 @@ internal fun CreateAccountScreen(
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .testTag("create_account_name_field"),
                 )
                 TextField(
                     value = state.balance,
@@ -104,14 +106,16 @@ internal fun CreateAccountScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .testTag("create_account_balance_field"),
                 )
                 SelectCurrencyItem(
                     selectedCurrency = state.selectedCurrency,
                     onClick = { onEvent(CurrencyClicked(state.selectedCurrency)) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .testTag("create_account_currency_field"),
                 )
             }
         }
@@ -159,7 +163,8 @@ private fun TopBar(
             style = MaterialTheme.typography.body1,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .clickable(onClick = onClickSave),
+                .clickable(onClick = onClickSave)
+                .testTag("create_account_save"),
         )
     }
 }

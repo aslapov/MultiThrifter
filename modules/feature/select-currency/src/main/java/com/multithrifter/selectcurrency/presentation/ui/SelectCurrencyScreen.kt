@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +52,7 @@ internal fun SelectCurrencyScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .testTag("currencies_list")
         ) {
             itemsIndexed(state.currencies) { index, currency ->
                 CurrencyItem(
@@ -87,7 +89,8 @@ private fun TopBar(
         )
         IconButton(
             onClick = onClickBack,
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier
+                .align(Alignment.CenterStart),
         ) {
             Icon(
                 painter = painterResource(id = UiR.drawable.ic_back),
@@ -121,6 +124,7 @@ private fun CurrencyItem(
             Text(
                 text = currency.symbol,
                 style = MaterialTheme.typography.body1,
+                modifier = Modifier.testTag("currency_name")
             )
             if (isSelected) {
                 Icon(

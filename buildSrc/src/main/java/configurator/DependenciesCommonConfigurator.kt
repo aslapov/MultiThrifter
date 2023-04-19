@@ -45,6 +45,7 @@ class DependenciesCommonConfigurator : ProjectConfigurator {
     private fun DependencyHandler.testLibs() {
         add(TEST_IMPLEMENTATION, Libraries.Test.JUNIT_API)
         add(TEST_IMPLEMENTATION, Libraries.Test.JUNIT_PARAMS)
+        add(TEST_IMPLEMENTATION, Libraries.Test.JUNIT_EXTENSIVE)
         add(TEST_RUNTIME_ONLY, Libraries.Test.JUNIT_ENGINE)
         add(TEST_IMPLEMENTATION, Libraries.Test.MOCKITO)
         add(TEST_IMPLEMENTATION, Libraries.Test.MOCKITO_JUPITER)

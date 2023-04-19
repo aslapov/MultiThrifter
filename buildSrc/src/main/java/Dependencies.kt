@@ -33,8 +33,13 @@ object Versions {
     // test
     const val MOCKK = "1.9.3"
     const val JUNIT = "5.8.2"
+    const val JUNIT_EXT = "1.1.5"
     const val ASSERT_J = "3.13.1"
     const val MOCKITO = "4.0.0"
+    const val SUPPORT_TEST_ORCHESTRATOR = "1.4.2"
+    const val ESPRESSO = "3.5.1"
+    const val UI_AUTOMATOR = "2.2.0"
+    const val KASPRESSO = "1.5.1"
 }
 
 object Libraries {
@@ -97,13 +102,20 @@ object Libraries {
         const val JUNIT_API = "org.junit.jupiter:junit-jupiter-api:${Versions.JUNIT}"
         const val JUNIT_ENGINE = "org.junit.jupiter:junit-jupiter-engine:${Versions.JUNIT}"
         const val JUNIT_PARAMS = "org.junit.jupiter:junit-jupiter-params:${Versions.JUNIT}"
+        const val JUNIT_EXTENSIVE = "androidx.test.ext:junit:${Versions.JUNIT_EXT}"
+        const val JUNIT_COMPOSE = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
         const val MOCKITO = "org.mockito:mockito-core:${Versions.MOCKITO}"
+        const val MOCKITO_ANDROID = "org.mockito:mockito-android:${Versions.MOCKITO}"
         const val MOCKITO_JUPITER = "org.mockito:mockito-junit-jupiter:${Versions.MOCKITO}"
         const val MOCKITO_INLINE = "org.mockito:mockito-inline:${Versions.MOCKITO}"
         const val MOCKITO_KOTLIN = "org.mockito.kotlin:mockito-kotlin:${Versions.MOCKITO}"
         const val ASSERT_J = "org.assertj:assertj-core:${Versions.ASSERT_J}"
         const val MOCKK = "io.mockk:mockk:${Versions.MOCKK}"
         const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES_VERSION}"
+        const val KASPRESSO = "com.kaspersky.android-components:kaspresso:${Versions.KASPRESSO}"
+        const val ESPRESSO_INTENTS = "androidx.test.espresso:espresso-intents:${Versions.ESPRESSO}"
+        const val UI_AUTOMATOR = "androidx.test.uiautomator:uiautomator:${Versions.UI_AUTOMATOR}"
+        const val ORCHESTRATOR = "androidx.test:orchestrator:${Versions.SUPPORT_TEST_ORCHESTRATOR}"
     }
 
     object Utils {

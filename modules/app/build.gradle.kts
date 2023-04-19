@@ -12,4 +12,16 @@ dependencies {
     implementation(project(MultiThrifterModule.Selectcurrency.path))
 
     implementation(Libraries.Support.APP_COMPAT)
+
+    androidTestImplementation(Libraries.Test.JUNIT_EXTENSIVE)
+    androidTestImplementation(Libraries.Test.JUNIT_COMPOSE)
+    androidTestImplementation(Libraries.Test.MOCKITO_KOTLIN)
+    androidTestImplementation(Libraries.Test.MOCKITO_ANDROID)
+    androidTestImplementation(Libraries.Test.ASSERT_J)
+    androidTestImplementation(Libraries.Test.KASPRESSO)
+    androidTestImplementation(Libraries.Test.ESPRESSO_INTENTS)
+    androidTestImplementation(Libraries.Test.UI_AUTOMATOR)
+    androidTestImplementation(Libraries.Support.DESIGN)
+
+    androidTestUtil(Libraries.Test.ORCHESTRATOR)
 }

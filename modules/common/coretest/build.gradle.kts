@@ -1,6 +1,7 @@
 dependencies {
     implementation(Libraries.Test.JUNIT_API)
     implementation(Libraries.Test.JUNIT_PARAMS)
+    implementation(Libraries.Test.JUNIT_EXTENSIVE)
 
     runtimeOnly(Libraries.Test.JUNIT_ENGINE)
 
