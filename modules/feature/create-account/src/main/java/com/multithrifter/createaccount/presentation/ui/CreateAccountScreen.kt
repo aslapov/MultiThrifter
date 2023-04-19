@@ -13,9 +13,12 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
@@ -37,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.multithrifter.core.domain.entity.Currency
@@ -64,59 +68,76 @@ internal fun CreateAccountScreen(
     Box {
         Scaffold(
             topBar = {
-                TopBar(
-                    onClickCancel = { onEvent(CancelClicked) },
-                    onClickSave = { onEvent(SaveClicked) }
-                )
+                TopBar { onEvent(CancelClicked) }
             },
             modifier = Modifier.fillMaxSize(),
         ) { paddingValues ->
-            Column(
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(paddingValues),
+                    .fillMaxSize()
+                    .padding(paddingValues)
             ) {
-                TextField(
-                    value = state.name,
-                    onValueChange = { onEvent(NameChanged(it)) },
-                    textStyle = MaterialTheme.typography.body2,
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.new_account_name),
-                            style = MaterialTheme.typography.body2,
-                        )
-                    },
-                    singleLine = true,
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    TextField(
+                        value = state.name,
+                        onValueChange = { onEvent(NameChanged(it)) },
+                        textStyle = MaterialTheme.typography.body2,
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.new_account_name),
+                                style = MaterialTheme.typography.body2,
+                            )
+                        },
+                        singleLine = true,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .testTag("create_account_name_field"),
+                    )
+                    TextField(
+                        value = state.balance,
+                        onValueChange = { onEvent(BalanceChanged(it)) },
+                        textStyle = MaterialTheme.typography.body2,
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.new_account_balance),
+                                style = MaterialTheme.typography.body2,
+                            )
+                        },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .testTag("create_account_balance_field"),
+                    )
+                    SelectCurrencyItem(
+                        selectedCurrency = state.selectedCurrency,
+                        onClick = { onEvent(CurrencyClicked(state.selectedCurrency)) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .testTag("create_account_currency_field"),
+                    )
+                }
+                Button(
+                    onClick = { onEvent(SaveClicked) },
+                    shape = RoundedCornerShape(8.dp),
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .testTag("create_account_name_field"),
-                )
-                TextField(
-                    value = state.balance,
-                    onValueChange = { onEvent(BalanceChanged(it)) },
-                    textStyle = MaterialTheme.typography.body2,
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.new_account_balance),
-                            style = MaterialTheme.typography.body2,
-                        )
-                    },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .testTag("create_account_balance_field"),
-                )
-                SelectCurrencyItem(
-                    selectedCurrency = state.selectedCurrency,
-                    onClick = { onEvent(CurrencyClicked(state.selectedCurrency)) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .testTag("create_account_currency_field"),
-                )
+                        .align(Alignment.BottomCenter)
+                        .padding(16.dp)
+                        .fillMaxWidth(),
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.new_account_save),
+                        style = MaterialTheme.typography.body1,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                            .testTag("create_account_save"),
+                    )
+                }
             }
         }
         
@@ -134,7 +155,6 @@ internal fun CreateAccountScreen(
 @Composable
 private fun TopBar(
     onClickCancel: () -> Unit,
-    onClickSave: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -149,23 +169,17 @@ private fun TopBar(
             style = MaterialTheme.typography.h2,
             modifier = Modifier.align(Alignment.Center),
         )
-        Text(
-            text = stringResource(id = R.string.new_account_cancel),
-            color = Color.White,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .align(Alignment.CenterStart)
-                .clickable(onClick = onClickCancel),
-        )
-        Text(
-            text = stringResource(id = R.string.new_account_save),
-            color = Color.White,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .clickable(onClick = onClickSave)
-                .testTag("create_account_save"),
-        )
+        IconButton(
+            onClick = onClickCancel,
+            modifier = Modifier.align(Alignment.CenterStart),
+        ) {
+            Icon(
+                painter = painterResource(id = com.multithrifter.ui.R.drawable.ic_back),
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(24.dp),
+            )
+        }
     }
 }
 

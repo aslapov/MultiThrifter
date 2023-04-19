@@ -13,9 +13,13 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
@@ -65,67 +69,95 @@ internal fun EditAccountScreen(
     Box {
         Scaffold(
             topBar = {
-                TopBar(
-                    onClickCancel = { onEvent(CancelClicked) },
-                    onClickSave = { onEvent(SaveClicked) }
-                )
+                TopBar { onEvent(CancelClicked) }
             },
             modifier = Modifier.fillMaxSize(),
         ) { paddingValues ->
-            Column(
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .padding(paddingValues),
             ) {
-                TextField(
-                    value = state.name,
-                    onValueChange = { onEvent(NameChanged(it)) },
-                    textStyle = MaterialTheme.typography.body2,
-                    label = {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    TextField(
+                        value = state.name,
+                        onValueChange = { onEvent(NameChanged(it)) },
+                        textStyle = MaterialTheme.typography.body2,
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.edit_account_name),
+                                style = MaterialTheme.typography.body2,
+                            )
+                        },
+                        singleLine = true,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                    )
+                    TextField(
+                        value = state.balance,
+                        onValueChange = { onEvent(BalanceChanged(it)) },
+                        textStyle = MaterialTheme.typography.body2,
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.edit_account_balance),
+                                style = MaterialTheme.typography.body2,
+                            )
+                        },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                    )
+                    SelectCurrencyItem(
+                        selectedCurrency = state.selectedCurrency,
+                        onClick = { onEvent(CurrencyClicked(state.selectedCurrency)) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                    )
+                }
+                Column(modifier = Modifier.align(Alignment.BottomCenter)) {
+                    Button(
+                        onClick = { onEvent(SaveClicked) },
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                    ) {
                         Text(
-                            text = stringResource(id = R.string.edit_account_name),
-                            style = MaterialTheme.typography.body2,
+                            text = stringResource(id = R.string.edit_account_save),
+                            style = MaterialTheme.typography.body1,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
                         )
-                    },
-                    singleLine = true,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                TextField(
-                    value = state.balance,
-                    onValueChange = { onEvent(BalanceChanged(it)) },
-                    textStyle = MaterialTheme.typography.body2,
-                    label = {
+                    }
+                    Button(
+                        onClick = { onEvent(DeleteClicked) },
+                        shape = RoundedCornerShape(8.dp),
+                        elevation = ButtonDefaults.elevation(
+                            defaultElevation = 0.dp,
+                            pressedElevation = 0.dp,
+                        ),
+                        colors = ButtonDefaults.outlinedButtonColors(),
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 16.dp)
+                            .fillMaxWidth(),
+                    ) {
                         Text(
-                            text = stringResource(id = R.string.edit_account_balance),
-                            style = MaterialTheme.typography.body2,
+                            text = stringResource(id = R.string.edit_account_delete),
+                            style = MaterialTheme.typography.body1,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
                         )
-                    },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                SelectCurrencyItem(
-                    selectedCurrency = state.selectedCurrency,
-                    onClick = { onEvent(CurrencyClicked(state.selectedCurrency)) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                )
-                Text(
-                    text = stringResource(id = R.string.edit_account_delete),
-                    color = MultiThrifterColors.backgroundError,
-                    style = MaterialTheme.typography.body1,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .padding(top = 64.dp)
-                        .clickable { onEvent(DeleteClicked) },
-                )
+                    }
+                }
             }
         }
         
@@ -143,7 +175,6 @@ internal fun EditAccountScreen(
 @Composable
 private fun TopBar(
     onClickCancel: () -> Unit,
-    onClickSave: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -158,22 +189,17 @@ private fun TopBar(
             style = MaterialTheme.typography.h2,
             modifier = Modifier.align(Alignment.Center),
         )
-        Text(
-            text = stringResource(id = R.string.edit_account_cancel),
-            color = Color.White,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .align(Alignment.CenterStart)
-                .clickable(onClick = onClickCancel),
-        )
-        Text(
-            text = stringResource(id = R.string.edit_account_save),
-            color = Color.White,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .clickable(onClick = onClickSave),
-        )
+        IconButton(
+            onClick = onClickCancel,
+            modifier = Modifier.align(Alignment.CenterStart),
+        ) {
+            Icon(
+                painter = painterResource(id = com.multithrifter.ui.R.drawable.ic_back),
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(24.dp),
+            )
+        }
     }
 }
 
